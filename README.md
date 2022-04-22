@@ -13,7 +13,9 @@ A project from [JavaScript 30 -23](https://youtu.be/saCpKH_xdgs)
 2. 更改语言
    ```js
    // 接上
-   let voices = speechSynthesis.getVoices();
+   let voices;
+   voices = speechSynthesis.getVoices();
+   // 如果直接写let voices=speechSynthesis.getVoices()会得到空数组，为什么？
    msg.text = "您好";
    msg.voice = voices.find((voice) => voice.lang === "zh-CN");
    speechSynthesis.speak(msg);

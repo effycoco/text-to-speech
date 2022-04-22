@@ -40,8 +40,21 @@
     const stopButton = document.querySelector('#stop');
     msg.text = document.querySelector('[name="text"]').value;
     function populateVoices() {
-      voices = this.getVoices();// 得到object构成的数组，每个object代表一种语言
-      const voiceOptions = voices.map(voice => `<option value=${voice.name}>${voice.name}(${voice.lang})</option>`).join('')
+      voices = this.getVoices(); // 得到object构成的数组，每个object代表一种语音
+      // 将语音按语言排序，默认语言不动
+      voices.sort((a, b) => {
+        if (!a.default && !b.default) {
+          if (a.lang < b.lang) {
+            return -1;
+          } else {
+            return 1;
+          }
+        }
+      });
+      console.log(voices);
+      const voiceOptions = voices
+        .map(voice => `<option value=${voice.name}>${voice.name}(${voice.lang})</option>`)
+        .join('')
       voicesDropdown.innerHTML = voiceOptions;
       msg.voice = voices[0];// 设置默认声音
     }
